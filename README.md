@@ -26,37 +26,3 @@ docker-compose --project-directory=${PROJECT_DIRECTORY} logs --follow
 # Stop:
 docker-compose --project-directory=${PROJECT_DIRECTORY} down
 ````
-
-### simple-example
-
-As explained in the blog post, uses a docker-compose service to add the container in the VPN.
-
-### complex-example
-
-Not complex but more complex than the simple-example.
-A nginx layer is added. It manages two services in independent containers at urls `/service-one` and `/service-two`.
-
-### stateful-example
-
-Same as simple-example but uses a volume to save state. The goal is to be able to reuse the same tailscale hostname _and ip address_.
-Useful in situations where the tailscale magic DNS cannot be used.
-
-## K8S
-
-Same as the simple-example but on kubernetes.
-
-Requirements:
-
-- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installing-with-a-package-manager)
-- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
-
-Usage:
-````bash
-# Create cluster
-kind create cluster --name tailscale
-kubectl get nodes
-# Deploy tailscale and demo webpage:
-kubectl apply -f k8s/simple-example/deployment.yaml
-# Delete cluster:
-kind delete cluster --name tailscale
-````
